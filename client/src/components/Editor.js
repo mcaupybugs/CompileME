@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import AceEditor from "react-ace";
-import axios from 'axios';
+import backend from '../api/backend';
 import "ace-builds/src-noconflict/mode-javascript";
 import "ace-builds/src-noconflict/mode-java";
 import "ace-builds/src-noconflict/theme-github";
@@ -12,7 +12,7 @@ class Editor extends Component {
     constructor() {
         super();
         this.state = {
-            theme: "eclipse",
+            theme: "monokai",
             font: 14,
             value: `
 import java.util.*;
@@ -28,6 +28,7 @@ class Main{
             `,
             mode: "java",
             output: "",
+            input: ""
         }
     }
 
@@ -42,8 +43,12 @@ class Main{
     onChangeValue = (newValue) => {
         this.setState({ value: newValue })
     }
+    onInputChange = (event) => {
+        this.setState({ input: event.target.value });
+        //console.log(event.target.value);
+    }
     run = async () => {
-        const response = await axios.post('/run', { code: this.state.value, mode: this.state.mode });
+        const response = await backend.post('/run', { code: this.state.value, mode: this.state.mode, givenInput: this.state.input });
         this.setState({ output: response.data });
     }
 
@@ -55,7 +60,7 @@ class Main{
                         <option value="java">java</option>
                         <option value="c_cpp">c_cpp</option>
                     </select>
-                    <select className="btn btn-danger dropdown-toggle" value={this.state.platform} onChange={this.ChangeTheme}>
+                    <select className="btn btn-danger dropdown-toggle" value={this.state.theme} onChange={this.ChangeTheme}>
                         <option value="eclipse">eclipse</option>
                         <option value="terminal">terminal</option>
                         <option value="monokai">monokai</option>
@@ -76,7 +81,15 @@ class Main{
                         fontSize={this.state.font}
                     />
                 </div>
-                <pre style={{ background: "yellow" }}>{this.state.output}</pre>
+                <div className="form-group">
+                    <label for="exampleTextarea" className="bmd-label-floating">Your output goes here!!!</label>
+                    <textarea value={this.state.input} rows="3" onChange={this.onInputChange}></textarea>
+                </div>
+                <div>
+                    <div className="card-body">
+                        <pre className="card-text">{this.state.output}</pre>
+                    </div>
+                </div>
             </div>
         );
     }
