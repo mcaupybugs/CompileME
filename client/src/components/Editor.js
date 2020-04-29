@@ -7,6 +7,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-eclipse";
+import { Button } from 'react-bootstrap';
 
 class Editor extends Component {
     constructor() {
@@ -55,39 +56,46 @@ class Main{
     render() {
         return (
             <div>
-                <div id="buttons" style={{ marginRight: "10px" }}>
-                    <select className="btn btn-primary dropdown-toggle" value={this.state.mode} onChange={this.handleChange}>
+                <div className="container-fluid" id="buttons" style={{ marginRight: "10px" }}>
+                    <select className="btn btn-outline-dark dropdown-toggle" style={{ marginLeft: "10px", marginBottom: "10px" }} value={this.state.mode} onChange={this.handleChange}>
                         <option value="java">java</option>
                         <option value="c_cpp">c_cpp</option>
                     </select>
-                    <select className="btn btn-danger dropdown-toggle" value={this.state.theme} onChange={this.ChangeTheme}>
+
+                    <select className="btn btn-outline-dark dropdown-toggle" style={{ marginLeft: "10px", marginBottom: "10px" }} value={this.state.theme} onChange={this.ChangeTheme}>
                         <option value="eclipse">eclipse</option>
                         <option value="terminal">terminal</option>
                         <option value="monokai">monokai</option>
                         <option value="github">github</option>
                     </select>
-                    <button className="btn btn-success" onClick={this.run}>run</button>
-                    <button className="btn btn-success" >Get Answer</button>
+                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.run}>run</button>
+                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} >Get Answer</button>
                 </div>
-                <div>
-                    <AceEditor
+                <div className="container-fluid ">
+                    <AceEditor className="border border-dark rounded-lg" style={{ marginLeft: "10px" }}
                         mode={this.state.mode}
                         theme={this.state.theme}
                         onChange={this.onChangeValue}
                         name="UNIQUE_ID_OF_DIV"
                         value={this.state.value}
-                        height="500px"
+                        height="60vh"
+                        width="78vh"
                         editorProps={{ $blockScrolling: true }}
                         fontSize={this.state.font}
                     />
                 </div>
-                <div className="form-group">
-                    <label for="exampleTextarea" className="bmd-label-floating">Your output goes here!!!</label>
-                    <textarea value={this.state.input} rows="3" onChange={this.onInputChange}></textarea>
+                <div style={{ marginLeft: "25px", marginTop: "5px", width: "78vh" }} className="form-group ">
+                    <label for="Textarea" >Your Input goes here!!!</label>
+                    <textarea id="Textarea" className="form-control border border-dark" value={this.state.input} rows="3" onChange={this.onInputChange}></textarea>
                 </div>
                 <div>
-                    <div className="card-body">
-                        <pre className="card-text">{this.state.output}</pre>
+                    <div className="card mt-2 rounded" style={{ marginLeft: "25px", marginTop: "5px", width: "78vh" }} id="output">
+                        <div className="card-header">
+                            Output
+                        </div>
+                        <div className="card-body">
+                            <pre className="card-text">{this.state.output}</pre>
+                        </div>
                     </div>
                 </div>
             </div>

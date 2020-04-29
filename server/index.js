@@ -26,23 +26,18 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/run', (req, res) => {
 
-    // console.log(req.body.code);
-    // console.log(req.body.lang);
     var mode = req.body.mode;
     var givenInput = req.body.givenInput;
-    console.log(req.body.mode);
     fs.writeFile('input.txt', givenInput, (err) => {
         if (err) throw err;
     })
     if (mode === 'c_cpp') {
         fs.writeFile('data.cpp', req.body.code, (err) => {
             if (err) throw err;
-
-            //console.log("Saved!!");
         })
         exec('make data', (err, stdout, stderr) => {
             if (err) {
-                console.log(stderr);
+                //console.log(stderr);
                 fs.writeFile('output.txt', stderr, (err) => {
                     if (err) throw err;
                     else {
@@ -78,16 +73,11 @@ app.post('/run', (req, res) => {
         })
     }
     if (mode === 'java') {
-        console.log("runn");
         fs.writeFile('Main.java', req.body.code, (err) => {
             if (err) throw err;
-
-            //console.log("Saved!!");
         })
         exec('javac Main.java', (err, stdout, stderr) => {
             if (err) {
-                console.log(stderr);
-                console.log(stdout);
                 fs.writeFile('output.txt', stderr, (err) => {
                     if (err) throw err;
                     else {
@@ -111,8 +101,6 @@ app.post('/run', (req, res) => {
                             console.log(err);
                         }
                     } else {
-                        console.log(stderr);
-                        console.log(stdout);
                         fs.readFile('output.txt', (err, data) => {
                             if (err) throw err;
                             else {
