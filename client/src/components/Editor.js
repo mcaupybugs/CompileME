@@ -12,28 +12,26 @@ import { Button } from 'react-bootstrap';
 class Editor extends Component {
     constructor() {
         super();
+        var cppStub = "#include<iostream>\nusing namespace std;\nint main(){\n\tcout<<\"Hello Coders\";\n\treturn 0;\n}";
         this.state = {
             theme: "monokai",
             font: 14,
-            value: `
-import java.util.*;
-class Main{
-    public static void main(String[] args){
-        Scanner s=new Scanner(System.in);
-        int n=s.nextInt();
-        for(int i=0;i<n;i++){
-            System.out.print("*");
-        }
-    }
-}
-            `,
-            mode: "java",
+            value: cppStub,
+            mode: "c_cpp",
             output: "",
             input: ""
         }
     }
 
     handleChange = (event) => {
+        var javaStub = "public class Main{\n\tpublic static void main(String [] args){\n\t\tSystem.out.println(\"Hello Coders\");\n\t}\n}";
+        var cppStub = "#include<iostream>\nusing namespace std;\nint main(){\n\tcout<<\"Hello Coders\";\n\treturn 0;\n}";
+        if (event.target.value === 'java') {
+            this.setState({ value: javaStub });
+        }
+        if (event.target.value === 'c_cpp') {
+            this.setState({ value: cppStub });
+        }
         this.setState({ mode: event.target.value });
     }
 
@@ -58,8 +56,8 @@ class Main{
             <div>
                 <div className="container-fluid" id="buttons" style={{ marginRight: "10px" }}>
                     <select className="btn btn-outline-dark dropdown-toggle" style={{ marginLeft: "10px", marginBottom: "10px" }} value={this.state.mode} onChange={this.handleChange}>
-                        <option value="java">java</option>
                         <option value="c_cpp">c_cpp</option>
+                        <option value="java">java</option>
                     </select>
 
                     <select className="btn btn-outline-dark dropdown-toggle" style={{ marginLeft: "10px", marginBottom: "10px" }} value={this.state.theme} onChange={this.ChangeTheme}>

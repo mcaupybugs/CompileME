@@ -7,17 +7,6 @@ var fs = require('fs');
 const { exec, spawn } = require('child_process');
 
 
-// var storage = multer.diskStorage({
-//     destination: function (req, file, cb) {
-//         cb(null, 'upload');
-//     },
-//     filename: function (req, file, cb) {
-//         cb(null, file.originalname);
-//     }
-// })
-
-// var upload = multer({ storage: storage });
-
 mongoose.connect("mongodb://localhost/CompileME");
 app.use(cors());
 app.use(bodyParser.json());
