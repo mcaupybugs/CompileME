@@ -2,7 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { signIn, signOut } from '../actions';
 import key from '../key/key';
-import { Nav } from 'react-bootstrap';
+import UserIcon from './UserIcon';
+
+import { Nav, NavDropdown, Container, Row } from 'react-bootstrap';
 const url = require('../assets/google.png');
 
 class GoogleAuth extends React.Component {
@@ -55,10 +57,14 @@ class GoogleAuth extends React.Component {
             return null;
         } else if (this.props.isSignedIn) {
             return (
-                <Nav.Link onClick={this.onSignOutClick} className="btn btn-outline-dark">
-                    <img src={url} width="24px" height="24px" style={{ marginRight: "3px" }}></img>
-                    Sign Out
-                </Nav.Link>
+                <div>
+                    <Container>
+                        <Row>
+                            <UserIcon image={this.auth.currentUser.get().getBasicProfile().getImageUrl()} signout={this.onSignOutClick} />
+
+                        </Row>
+                    </Container>
+                </div>
             )
         } else {
             return (

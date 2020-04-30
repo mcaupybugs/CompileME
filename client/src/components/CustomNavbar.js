@@ -13,8 +13,8 @@ class CustomNavbar extends React.Component {
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="mr-auto">
-                            <Nav.Link href="#home">Compiler</Nav.Link>
-                            <Nav.Link href="#link">Home</Nav.Link>
+                            <Nav.Link style={{ color: "black" }} href="#home">Compiler</Nav.Link>
+                            <Nav.Link style={{ color: "black" }} href="#link">Home</Nav.Link>
                         </Nav>
                         <Nav >
                             <GoogleAuth />
