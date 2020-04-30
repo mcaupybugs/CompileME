@@ -7,7 +7,6 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-eclipse";
-import { Button } from 'react-bootstrap';
 
 class Editor extends Component {
     constructor() {
@@ -66,8 +65,8 @@ class Editor extends Component {
                         <option value="monokai">monokai</option>
                         <option value="github">github</option>
                     </select>
-                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.run}>run</button>
-                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} >Get Answer</button>
+                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.run}>Test</button>
+                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} >Submit</button>
                 </div>
                 <div className="container-fluid ">
                     <AceEditor className="border border-dark rounded-lg" style={{ marginLeft: "10px" }}

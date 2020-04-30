@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
+import GoogleAuth from './GoogleAuth';
+
 class CustomNavbar extends React.Component {
 
     render() {
@@ -14,7 +16,11 @@ class CustomNavbar extends React.Component {
                             <Nav.Link href="#home">Compiler</Nav.Link>
                             <Nav.Link href="#link">Home</Nav.Link>
                         </Nav>
+                        <Nav >
+                            <GoogleAuth />
+                        </Nav>
                     </Navbar.Collapse>
+
                 </Navbar>
             </div >
         )

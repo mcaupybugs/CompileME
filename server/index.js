@@ -5,13 +5,52 @@ var cors = require('cors');
 var bodyParser = require('body-parser');
 var fs = require('fs');
 const { exec, spawn } = require('child_process');
-
+var User = require('./models/user');
 
 mongoose.connect("mongodb://localhost/CompileME");
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+
+
+//==============================================> New user route
+app.post('/newUser', (req, res) => {
+    //console.log("ru");
+    User.exists({ userId: req.body.values.userId }, (err, result) => {
+        if (err) {
+            res.status(404).send();
+            console.log(err);
+        } else {
+            if (result == true) {
+                //   console.log(req.body.values);
+                User.findOneAndUpdate({ userId: req.body.values.userId }, req.body, (err, result) => {
+                    if (err) {
+                        console.log(err);
+                        res.status(404).send();
+                    } else {
+                        //   console.log("Update");
+                        res.status(200).send();
+                    }
+                })
+            } else {
+                User.create(req.body.values, (err, data) => {
+                    if (err) {
+                        console.log(err)
+                        res.status(404).send();
+                    } else {
+                        // console.log("Create");
+                        res.status(200).send();
+                    }
+                })
+            }
+        }
+    })
+    res.status(200).send();
+})
+
+
+//==============================================>Running route
 
 app.post('/run', (req, res) => {
 
