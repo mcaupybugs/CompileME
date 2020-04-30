@@ -22,14 +22,18 @@ class GoogleAuth extends React.Component {
     }
 
     onAuthChange = isSignedIn => {
+        console.log(isSignedIn);
         this.googleUser = this.auth.currentUser.get();
-        var values = {
-            userId: this.googleUser.getBasicProfile().getId(),
-            name: this.googleUser.getBasicProfile().getName(),
-            image: this.googleUser.getBasicProfile().getImageUrl(),
-            email: this.googleUser.getBasicProfile().getEmail()
-        } // to get the user name 
-        //console.log(values); // display the user name
+        console.log(this.googleUser.getBasicProfile());
+        if (this.googleUser.getBasicProfile() != undefined) {
+            var values = {
+                userId: this.googleUser.getBasicProfile().getId(),
+                name: this.googleUser.getBasicProfile().getName(),
+                image: this.googleUser.getBasicProfile().getImageUrl(),
+                email: this.googleUser.getBasicProfile().getEmail()
+            } // to get the user name 
+            //console.log(values); // display the user name
+        }
         this.auth.currentUser.get().getId();
         if (isSignedIn) {
             this.props.signIn(values);
@@ -59,7 +63,7 @@ class GoogleAuth extends React.Component {
         } else {
             return (
                 <Nav.Link onClick={this.onSignInClick} className="btn btn-outline-dark">
-                    <img src={url} width="24px" height="24px" style={{ marginRight: "3px" }}></img>                    Sign In with google
+                    <img src={url} width="24px" height="24px" style={{ marginRight: "3px" }}></img>Sign In with google
                 </Nav.Link>
             )
         }
