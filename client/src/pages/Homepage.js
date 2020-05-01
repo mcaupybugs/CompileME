@@ -14,10 +14,10 @@ class Homepage extends React.Component {
         return (
             <div>
                 <CustomNavbar />
-                <Container>
+                <Container style={{ marginRight: "20px", marginLeft: "20px" }} fluid="true">
                     <Row>
-                        <Col>Yo</Col>
-                        <Col xs={8}><ContentCard header={this.state.header} title={this.state.title} content={this.state.content}></ContentCard></Col>
+                        <Col></Col>
+                        <Col xs={7}><ContentCard header={this.state.header} title={this.state.title} content={this.state.content}></ContentCard></Col>
                         <Col>Yo</Col>
                     </Row>
                 </Container>

@@ -7,6 +7,8 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-eclipse";
+var correctImage = require('../assets/correctImage.png');
+var wrongImage = require('../assets/wrongImage.png');
 
 class Editor extends Component {
     constructor() {
@@ -18,7 +20,8 @@ class Editor extends Component {
             value: cppStub,
             mode: "c_cpp",
             output: "",
-            input: ""
+            input: "",
+            result: ""
         }
     }
 
@@ -49,6 +52,18 @@ class Editor extends Component {
         const response = await backend.post('/run', { code: this.state.value, mode: this.state.mode, givenInput: this.state.input });
         this.setState({ output: response.data });
     }
+    submit = async () => {
+        const response = await backend.post('/submit', { code: this.state.value, mode: this.state.mode, givenInput: this.state.input });
+        this.setState({ result: response.data });
+        var resultCard = document.getElementById("resultCard");
+        var resultImage = document.getElementById("resultImage");
+        resultCard.style.display = "block";
+        if (this.state.result == "Passed") {
+            resultImage.src = correctImage;
+        } else {
+            resultImage.src = wrongImage;
+        }
+    }
 
     render() {
         return (
@@ -66,7 +81,7 @@ class Editor extends Component {
                         <option value="github">github</option>
                     </select>
                     <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.run}>Test</button>
-                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} >Submit</button>
+                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.submit}>Submit</button>
                 </div>
                 <div className="container-fluid ">
                     <AceEditor className="border border-dark rounded-lg" style={{ marginLeft: "10px" }}
@@ -80,6 +95,13 @@ class Editor extends Component {
                         editorProps={{ $blockScrolling: true }}
                         fontSize={this.state.font}
                     />
+                </div>
+                <div id="resultCard" style={{ display: "none" }}>
+                    <div className="card mt-2 rounded" style={{ marginLeft: "25px", marginTop: "5px", width: "78vh" }} id="output">
+                        <div className="card-header"><img style={{ marginRight: "10px" }} width="24px" height="24px" id="resultImage"></img>
+                            {this.state.result}
+                        </div>
+                    </div>
                 </div>
                 <div style={{ marginLeft: "25px", marginTop: "5px", width: "78vh" }} className="form-group ">
                     <label for="Textarea" >Your Input goes here!!!</label>

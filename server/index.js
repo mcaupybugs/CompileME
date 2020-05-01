@@ -142,6 +142,98 @@ app.post('/run', (req, res) => {
     }
 })
 
+//==========================================================>Submit route
+app.post('/submit', (req, res) => {
+
+    var mode = req.body.mode;
+    var givenInput = req.body.givenInput;
+    fs.writeFile('input.txt', givenInput, (err) => {
+        if (err) throw err;
+    })
+    if (mode === 'c_cpp') {
+        fs.writeFile('data.cpp', req.body.code, (err) => {
+            if (err) throw err;
+        })
+        exec('make data', (err, stdout, stderr) => {
+            if (err) {
+                //console.log(stderr);
+                fs.writeFile('output.txt', stderr, (err) => {
+                    if (err) throw err;
+                    else {
+                        res.send("Failed\n" + stderr);
+                    }
+                })
+                return;
+            } else {
+                exec('timeout 1s ./data < input.txt > output.txt', (err, stdout, stderr) => {
+                    if (err) {
+                        console.log(err);
+                        if (err.code == 124) {
+                            res.send("Failed\n TLE");
+                        }
+                        else if (err.code == 1) {
+                            res.send("Failed\n" + err.message);
+                        } else if (err.code == 139) {
+                            res.send("Failed\n SEGMENTATION FAULT");
+                        } else {
+                            console.log(err);
+                        }
+                    } else {
+                        var testCase = fs.readFileSync('output.txt', 'utf-8');
+                        var correctCase = fs.readFileSync('correct.txt', 'utf-8');
+                        if (testCase === correctCase) {
+                            res.send("Passed");
+                        } else {
+                            res.send("Failed");
+                        }
+                    }
+                })
+            }
+        })
+    }
+    if (mode === 'java') {
+        fs.writeFile('Main.java', req.body.code, (err) => {
+            if (err) throw err;
+        })
+        exec('javac Main.java', (err, stdout, stderr) => {
+            if (err) {
+                fs.writeFile('output.txt', stderr, (err) => {
+                    if (err) throw err;
+                    else {
+                        res.send("Failed\n" + stderr);
+                    }
+                })
+                return;
+            } else {
+                exec('timeout 1s java Main < input.txt > output.txt', (err, stdout, stderr) => {
+                    if (err) {
+                        console.log(err);
+                        if (err.code == 124) {
+                            res.send("Failed\n TLE");
+                        }
+                        else if (err.code == 1) {
+                            res.send("Failed\n" + err.message);
+                        }
+                        else if (err.code == 139) {
+                            res.send("Failed\n SEGMENTATION FAULT");
+                        } else {
+                            console.log(err);
+                        }
+                    } else {
+                        var testCase = fs.readFileSync('output.txt', 'utf-8');
+                        var correctCase = fs.readFileSync('correct.txt', 'utf-8');
+                        if (testCase === correctCase) {
+                            res.send("Passed");
+                        } else {
+                            res.send("Failed");
+                        }
+                    }
+                })
+            }
+        })
+    }
+})
+
 
 // listening route
 const port = process.env.PORT || 3001;
