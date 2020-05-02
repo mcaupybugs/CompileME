@@ -77,6 +77,20 @@ app.post('/newQuestion', (req, res) => {
     })
 })
 
+//==============================================> Question list
+
+app.get('/questionList', (req, res) => {
+    Question.find({}, (err, data) => {
+        if (err) {
+            res.status(404).send();
+        } else {
+            res.status(200).send(data);
+            console.log(data);
+        }
+    })
+})
+
+
 //==============================================>Running route
 
 app.post('/run', (req, res) => {
