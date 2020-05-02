@@ -4,6 +4,13 @@ var questionSchema = new mongoose.Schema({
     code: String,
     title: String,
     content: String,
+    input: String,
+    output: String,
+    constraints: String,
+    tasks: String,
+    exampleInput: String,
+    exampleOutput: String,
+    explaination: String,
     testCaseInput: String,
     testCaseOutput: String
 });
