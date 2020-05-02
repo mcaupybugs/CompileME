@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var fs = require('fs');
-const { exec, spawn } = require('child_process');
+const { exec } = require('child_process');
 var User = require('./models/user');
 var Question = require('./models/question');
 
@@ -50,6 +50,32 @@ app.post('/newUser', (req, res) => {
     res.status(200).send();
 })
 
+//==============================================> New question 
+
+app.post('/newQuestion', (req, res) => {
+    console.log(req.body.code);
+    Question.exists({ code: req.body.code }, (err, result) => {
+        if (err) {
+            res.send("There was a error ... Try again later..")
+            console.log(err);
+        } else {
+            if (result == true) {
+                console.log("Already exists");
+                res.send("Question Code already exists");
+            } else {
+                Question.create(req.body, (err, data) => {
+                    if (err) {
+                        res.send("There was a error ... Try again later..")
+                        console.log(err);
+                    } else {
+                        res.send("Upload Success");
+                        console.log(data);
+                    }
+                })
+            }
+        }
+    })
+})
 
 //==============================================>Running route
 

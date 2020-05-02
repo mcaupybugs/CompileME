@@ -4,6 +4,7 @@ import history from './history';
 import Homepage from './pages/Homepage';
 import ProblemPage from './pages/ProblemPage';
 import CompilerPage from './pages/CompilerPage';
+import AddQuestion from './pages/AddQuestion';
 
 class App extends React.Component {
 
@@ -17,6 +18,7 @@ class App extends React.Component {
                             <Route path="/" exact component={Homepage} />
                             <Route path="/compiler" exact component={CompilerPage} />
                             <Route path="/question/:id" exact component={ProblemPage} />
+                            <Route path="/addquestion" exact component={AddQuestion} />
                         </Switch>
                     </div>
                 </Router>

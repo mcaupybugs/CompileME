@@ -4,9 +4,10 @@ var questionSchema = new mongoose.Schema({
     code: String,
     title: String,
     content: String,
-    testCase: String
+    testCaseInput: String,
+    testCaseOutput: String
 });
 
 var Question = mongoose.model("Question", questionSchema);
 
-module.exoprts = Question;
+module.exports = Question;
