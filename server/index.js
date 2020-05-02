@@ -6,6 +6,7 @@ var bodyParser = require('body-parser');
 var fs = require('fs');
 const { exec, spawn } = require('child_process');
 var User = require('./models/user');
+var Question = require('./models/question');
 
 mongoose.connect("mongodb://localhost/CompileME");
 app.use(cors());
