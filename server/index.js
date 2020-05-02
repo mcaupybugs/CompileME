@@ -91,6 +91,20 @@ app.get('/questionList', (req, res) => {
 })
 
 
+//==============================================>Single question route
+app.get('/questionDetail/:id', (req, res) => {
+    //console.log(req.params.id);
+    var questionCode = req.params.id;
+    Question.find({ code: questionCode }, (err, result) => {
+        if (err) {
+            console.log(err);
+            res.status(404).send();
+        } else {
+            res.status(200).send(result);
+        }
+    })
+})
+
 //==============================================>Running route
 
 app.post('/run', (req, res) => {
