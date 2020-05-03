@@ -202,9 +202,24 @@ app.post('/submit', (req, res) => {
 
     var mode = req.body.mode;
     var givenInput = req.body.givenInput;
-    fs.writeFile('input.txt', givenInput, (err) => {
-        if (err) throw err;
+    var questionCode = req.body.questionCode;
+    console.log(questionCode);
+    Question.find({ code: questionCode }, (err, result) => {
+        if (err) {
+            console.log(err);
+        } else {
+            console.log(result[0].testCaseInput);
+            var input = result[0].testCaseInput;
+            fs.writeFile('input.txt', input, (err) => {
+                if (err) throw err;
+            })
+            var correct = result[0].testCaseOutput;
+            fs.writeFile('correct.txt', correct, (err) => {
+                if (err) throw err;
+            })
+        }
     })
+
     if (mode === 'c_cpp') {
         fs.writeFile('data.cpp', req.body.code, (err) => {
             if (err) throw err;

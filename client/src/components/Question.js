@@ -15,9 +15,9 @@ class Question extends React.Component {
         var res = path.split('/');
         this.setState({ id: res[2] });
         var string = "/questionDetail/" + res[2];
-        console.log(string);
+        //console.log(string);
         const response = await backend.get(string);
-        console.log(response.data[0]);
+        //console.log(response.data[0]);
         this.setState({ data: response.data[0] });
     }
 

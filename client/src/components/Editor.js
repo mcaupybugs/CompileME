@@ -53,7 +53,7 @@ class Editor extends Component {
         this.setState({ output: response.data });
     }
     submit = async () => {
-        const response = await backend.post('/submit', { code: this.state.value, mode: this.state.mode, givenInput: this.state.input });
+        const response = await backend.post('/submit', { code: this.state.value, mode: this.state.mode, givenInput: this.state.input, questionCode: this.props.questionCode });
         this.setState({ result: response.data });
         var resultCard = document.getElementById("resultCard");
         var resultImage = document.getElementById("resultImage");
