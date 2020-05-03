@@ -64,6 +64,13 @@ class Editor extends Component {
             resultImage.src = wrongImage;
         }
     }
+    submitButtonRender() {
+        console.log(this.props.questionCode);
+        if (this.props.questionCode != undefined) {
+            return <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.submit}>Submit</button>;
+
+        }
+    }
 
     render() {
         return (
@@ -81,7 +88,7 @@ class Editor extends Component {
                         <option value="github">github</option>
                     </select>
                     <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.run}>Test</button>
-                    <button className="btn btn-outline-dark" style={{ marginLeft: "10px", marginBottom: "10px" }} onClick={this.submit}>Submit</button>
+                    {this.submitButtonRender()}
                 </div>
                 <div className="container-fluid ">
                     <AceEditor className="border border-dark rounded-lg" style={{ marginLeft: "10px" }}
