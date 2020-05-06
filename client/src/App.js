@@ -5,6 +5,7 @@ import Homepage from './pages/Homepage';
 import ProblemPage from './pages/ProblemPage';
 import CompilerPage from './pages/CompilerPage';
 import AddQuestion from './pages/AddQuestion';
+import UserPage from './pages/UserPage';
 
 class App extends React.Component {
 
@@ -19,6 +20,7 @@ class App extends React.Component {
                             <Route path="/compiler" exact component={CompilerPage} />
                             <Route path="/question/:id" exact component={ProblemPage} />
                             <Route path="/addquestion" exact component={AddQuestion} />
+                            <Route path='/user/' exact component={UserPage} />
                         </Switch>
                     </div>
                 </Router>

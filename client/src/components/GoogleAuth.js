@@ -60,7 +60,7 @@ class GoogleAuth extends React.Component {
                 <div>
                     <Container>
                         <Row>
-                            <UserIcon image={this.auth.currentUser.get().getBasicProfile().getImageUrl()} name={this.auth.currentUser.get().getBasicProfile().getName()} signout={this.onSignOutClick} />
+                            <UserIcon image={this.auth.currentUser.get().getBasicProfile().getImageUrl()} name={this.auth.currentUser.get().getBasicProfile().getName()} userId={this.auth.currentUser.get().getBasicProfile().getId()} signout={this.onSignOutClick} />
                         </Row>
                     </Container>
                 </div>

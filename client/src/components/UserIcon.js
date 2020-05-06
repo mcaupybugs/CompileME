@@ -14,7 +14,7 @@ class UserIcon extends React.Component {
                     <NavDropdown.Item disabled>Hi, {this.props.name}</NavDropdown.Item>
                     <NavDropdown.Item href="/addquestion"><img src={addIcon} width="16px" height="16px" style={{ marginRight: "12px" }}></img>Add Question</NavDropdown.Item>
                     <NavDropdown.Divider></NavDropdown.Divider>
-                    <NavDropdown.Item><img src={profileUpdateIcon} width="16px" height="16px" style={{ marginRight: "12px" }}></img>View Profile</NavDropdown.Item>
+                    <NavDropdown.Item href="/user/"><img src={profileUpdateIcon} width="16px" height="16px" style={{ marginRight: "12px" }}></img>View Profile</NavDropdown.Item>
                     <NavDropdown.Divider></NavDropdown.Divider>
                     <NavDropdown.Item onClick={this.props.signout}><img src={googleIcon} width="16px" height="16px" style={{ marginRight: "12px" }}></img>SignOut</NavDropdown.Item>
                 </NavDropdown>
