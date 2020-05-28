@@ -53,7 +53,7 @@ class GoogleAuth extends React.Component {
     }
 
     renderAuthButton() {
-        if (this.props.isSignedIn === null) {
+        if (this.props.isSignedIn === null || this.auth === undefined) {
             return null;
         } else if (this.props.isSignedIn) {
             return (

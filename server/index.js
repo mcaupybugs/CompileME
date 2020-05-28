@@ -8,7 +8,8 @@ const { exec } = require('child_process');
 var User = require('./models/user');
 var Question = require('./models/question');
 
-mongoose.connect("mongodb://localhost/CompileME");
+//mongoose.connect("mongodb://localhost/CompileME");
+mongoose.connect("mongodb+srv://mcaupybugs:CompileIt@cluster0-rqe7k.mongodb.net/test?retryWrites=true&w=majority")
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

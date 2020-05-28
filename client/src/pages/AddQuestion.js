@@ -88,10 +88,9 @@ class AddQuestion extends React.Component {
 
     submitQuestion = async () => {
         const response = await backend.post('/newQuestion', { code: this.state.questionCode, title: this.state.questionTitle, content: this.state.questionBody, input: this.state.questionInputDescription, output: this.state.questionOutputDescription, constraints: this.state.questionConstraintsDescription, tasks: this.state.questionTasks, exampleInput: this.state.questionExampleInput, exampleOutput: this.state.questionExampleOutput, explaination: this.state.questionExplaination, testCaseInput: this.state.questionTestcaseInput, testCaseOutput: this.state.questionTestcaseOutput });
-        //console.log(response);
         if (response.data == "Upload Success") {
             this.setState({ submitStatus: response.data });
-            history.push('/');
+            history.push('/compiler');
             //console.log(this.state.submitStatus);
         } else {
             this.setState({ submitStatus: response.data })
