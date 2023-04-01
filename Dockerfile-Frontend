@@ -1,0 +1,6 @@
+FROM node:18.13
+WORKDIR /usr/app
+COPY /client/package.json .
+RUN npm install --quiet
+COPY /client .
+ENTRYPOINT npm run start

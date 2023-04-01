@@ -8,7 +8,7 @@ const { exec } = require('child_process');
 var User = require('./models/user');
 var Question = require('./models/question');
 
-mongoose.connect("mongodb://localhost:27017/");
+mongoose.connect("mongodb://root:example@mongo:27017/");
 //mongoose.connect("mongodb+srv://mcaupybugs:CompileIt@cluster0-rqe7k.mongodb.net/test?retryWrites=true&w=majority")
 app.use(cors());
 app.use(bodyParser.json());
@@ -307,7 +307,7 @@ app.post('/submit', (req, res) => {
 
 
 // listening route
-const port = process.env.PORT || 3001;
+const port = 3001;
 
 app.listen(port, () => {
     console.log(`listening on port ${port}`);

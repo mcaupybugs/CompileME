@@ -1,8 +1,5 @@
 version: '3'
 services:
-  server:
-    build:
-      dockerfile: dockerfile
     
   mongo:
     image: mongo:4.4.6
@@ -20,3 +17,15 @@ services:
       ME_CONFIG_MONGODB_ADMINUSERNAME: root
       ME_CONFIG_MONGODB_ADMINPASSWORD: example
       ME_CONFIG_MONGODB_URL: mongodb://root:example@mongo:27017/
+  
+  server:
+    build:
+      dockerfile: Dockerfile-Backend
+    ports:
+      - 3001:3001
+  
+  client:
+    build:
+      dockerfile: Dockerfile-Frontend
+    ports:
+      - 3000:3000
