@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar, Nav } from 'react-bootstrap';
 import GoogleAuth from './GoogleAuth';
+import { GoogleOAuthProvider } from '@react-oauth/google';
 
 class CustomNavbar extends React.Component {
 
@@ -17,7 +18,9 @@ class CustomNavbar extends React.Component {
                             <Nav.Link style={{ color: "black" }} href="/">Home</Nav.Link>
                         </Nav>
                         <Nav >
+                        <GoogleOAuthProvider clientId="214049362911-8s33p6e1ntkaiscgle6tvbj264hdb87f.apps.googleusercontent.com">
                             <GoogleAuth />
+                        </GoogleOAuthProvider>
                         </Nav>
                     </Navbar.Collapse>
 

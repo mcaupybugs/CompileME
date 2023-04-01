@@ -4,7 +4,6 @@ import history from '../history';
 
 import { Card, Container, InputGroup, FormControl, Form, Button } from 'react-bootstrap';
 import backend from '../api/backend';
-var fs = require('fs');
 
 class AddQuestion extends React.Component {
     constructor() {

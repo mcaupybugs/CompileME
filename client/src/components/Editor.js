@@ -7,6 +7,7 @@ import "ace-builds/src-noconflict/theme-github";
 import "ace-builds/src-noconflict/theme-terminal";
 import "ace-builds/src-noconflict/theme-monokai";
 import "ace-builds/src-noconflict/theme-eclipse";
+import "ace-builds/src-noconflict/mode-c_cpp";
 var correctImage = require('../assets/correctImage.png');
 var wrongImage = require('../assets/wrongImage.png');
 
