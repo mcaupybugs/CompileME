@@ -2,5 +2,13 @@ FROM node:18.13
 WORKDIR /usr/app
 COPY /server/package.json .
 RUN npm install --quiet
+RUN apt update
+RUN apt install apt-transport-https ca-certificates wget dirmngr gnupg software-properties-common -y
+RUN wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
+RUN add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+RUN apt update
+RUN apt install adoptopenjdk-8-hotspot -y
+RUN apt install g++ -y
+RUN apt install build-essential -y
 COPY /server .
 ENTRYPOINT npm run start
